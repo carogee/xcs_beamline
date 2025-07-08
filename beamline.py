@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 from hutch_python.utils import safe_load
+from pcdsdevices.epics_motor import SmarAct, EpicsMotorInterface
+from pcdsdevices.interface import BaseInterface
 
 logger = logging.getLogger(__name__)
 
@@ -835,6 +837,8 @@ with safe_load('User Newports'):
 #    JF_x = Newport('XCS:USR:MMN:05', name='JF_x')
 #    bs_y = Newport('XCS:USR:MMN:06', name='bs_y')
 
+
+
 """
 with safe_load('Polycapillary System'):
     from pcdsdevices.epics_motor import EpicsMotorInterface
@@ -960,65 +964,68 @@ with safe_load('gon tth with z offset'):
 
 
 with safe_load('Create Aliases'):
-    #from xcs.db import at2l0
-    #at2l0_alias=at2l0
-    #from xcs.db import sb1
-    #create some old, known aliases
-    from xcs.db import hx2_pim as  xppyag1
-    from xcs.db import um6_pim as yag1
-    from xcs.db import hxd_dg2_pim as  yag2
-    from xcs.db import xcs_dg3_pim as  yag3
-    from xcs.db import xrt_dg3m_pim as  yag3m
-    from xcs.db import xcs_sb1_pim as  yag4
-    from xcs.db import xcs_sb2_pim as yag5
+   print("test")
+   ##from xcs.db import at2l0
+   ##at2l0_alias=at2l0
+   ##from xcs.db import sb1
+   ##create some old, known aliases
 
-    xppyag1.state.in_states = ['YAG', 'DIODE']
-    yag1.state.in_states = ['YAG', 'DIODE']
-    yag2.state.in_states = ['YAG', 'DIODE']
-    yag3.state.in_states = ['YAG', 'DIODE']
-    yag3m.state.in_states = ['YAG', 'DIODE']
-    yag4.state.in_states = ['YAG', 'DIODE']
-    yag5.state.in_states = ['YAG', 'DIODE']
+   from xcs.db import hx2_pim as  xppyag1
+   from xcs.db import um6_pim as yag1
+   from xcs.db import hxd_dg2_pim as  yag2
+   from xcs.db import xcs_dg3_pim as  yag3
+   from xcs.db import xrt_dg3m_pim as  yag3m
+   from xcs.db import xcs_sb1_pim as  yag4
+   from xcs.db import xcs_sb2_pim as yag5
+    
+   xppyag1.state.in_states = ['YAG', 'DIODE']
+   yag1.state.in_states = ['YAG', 'DIODE']
+   yag2.state.in_states = ['YAG', 'DIODE']
+   yag3.state.in_states = ['YAG', 'DIODE']
+   yag3m.state.in_states = ['YAG', 'DIODE']
+   yag4.state.in_states = ['YAG', 'DIODE']
+   yag5.state.in_states = ['YAG', 'DIODE']
 
-    from xcs.db import um6_ipm as ipm1
-    from xcs.db import hxd_dg2_ipm as ipm2
-    from xcs.db import xcs_dg3_ipm as ipm3
-    from xcs.db import xcs_sb1_ipm as ipm4
-    from xcs.db import xcs_sb2_ipm as ipm5
+   from xcs.db import um6_ipm as ipm1
+   from xcs.db import hxd_dg2_ipm as ipm2
+   from xcs.db import xcs_dg3_ipm as ipm3
+   from xcs.db import xcs_sb1_ipm as ipm4
+   from xcs.db import xcs_sb2_ipm as ipm5
 
-    from xcs.db import hx2_slits as xpps1
-    from xcs.db import um6_slits as s1
-    from xcs.db import hxd_dg2_slits as  s2
-    from xcs.db import xcs_dg3_slits as s3
-    from xcs.db import xrt_dg3m_slits as s3m
-    from xcs.db import xcs_sb1_slits as s4
-    from xcs.db import xcs_sb2_upstream_slits as s5
-    from xcs.db import xcs_sb2_downstream_slits as s6
+   #from xcs.db import hx2_slits as xpps1 #missing from xcs.db
+   from xcs.db import um6_slits as s1
+   from xcs.db import hxd_dg2_slits as  s2
+   from xcs.db import xcs_dg3_slits as s3
+   from xcs.db import xrt_dg3m_slits as s3m
+   from xcs.db import xcs_sb1_slits as s4
+   from xcs.db import xcs_sb2_upstream_slits as s5
+   from xcs.db import xcs_sb2_downstream_slits as s6
 
-    from xcs.db import at1l0 as fat1
-    from xcs.db import at2l0 as fat2	
+   from xcs.db import at1l0 as fat1
+   from xcs.db import at2l0 as fat2	
 
-    from xcs.db import xcs_attenuator as att
-    from xcs.db import xcs_pulsepicker as pp
-    from xcs.db import xcs_gon as gon
+   from xcs.db import xcs_attenuator as att
+   from xcs.db import xcs_pulsepicker as pp
+   from xcs.db import xcs_gon as gon
+   
+   from xcs.db import xcs_txt as txt
+   from xcs.db import xcs_lxt_fast as lxt_fast
 
-    from xcs.db import xcs_txt as txt
-    from xcs.db import xcs_lxt_fast as lxt_fast
+   from xcs.db import xcs_lodcm as lom
+   from xcs.db import xcs_ccm as ccm
+   from xcs.db import xcs_xfls as crl2
+   from xcs.db import xcs_pfls as crl1
 
-    from xcs.db import xcs_lodcm as lom
-    from xcs.db import xcs_ccm as ccm
-    #from xcs.db import xcs_xfls as crl2
-    from xcs.db import xcs_pfls as crl1
+   from xcs.db import xcs_samplestage
+   gon_sx = xcs_samplestage.x
+   gon_sy = xcs_samplestage.y
+   gon_sz = xcs_samplestage.z
 
-    from xcs.db import xcs_samplestage
-    gon_sx = xcs_samplestage.x
-    gon_sy = xcs_samplestage.y
-    gon_sz = xcs_samplestage.z
-
-    ccmE = ccm.energy
-    ccmE.name = 'ccmE'
-    ccmE_vernier = ccm.energy_with_vernier
-    ccmE_vernier.name = 'ccmE_vernier'
+   ccmE = ccm.energy
+   ccmE.name = 'ccmE'
+   ccmE_vernier = ccm.energy_with_vernier
+   ccmE_vernier.name = 'ccmE_vernier'
+    
 
 with safe_load('Pink/Mono Offset'):
     from xcs.beamline_offset import pinkmono

@@ -1013,7 +1013,6 @@ with safe_load('Create Aliases'):
 
    from xcs.db import xcs_lodcm as lom
    from xcs.db import xcs_ccm as ccm
-   from xcs.db import xcs_xfls as crl2
    from xcs.db import xcs_pfls as crl1
 
    from xcs.db import xcs_samplestage
